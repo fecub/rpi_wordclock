@@ -47,7 +47,7 @@ class wordclock_interface:
             for i in pinrange_to_listen:
                 virtual_pin = -1
                 if(i == self.button_left):
-                    virtual_pin = self.virtual_button_left
+                    virtual_pin = self.vir  tual_button_left
                 if(i == self.button_right):
                     virtual_pin = self.virtual_button_right
                 if(i == self.button_return):

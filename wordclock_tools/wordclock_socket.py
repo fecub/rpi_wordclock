@@ -13,8 +13,10 @@ class wordclock_socket:
         setup socket
         '''
         self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        print "Connection initialized"
         self.s.bind((TCP_IP, TCP_PORT))
         self.s.listen(1)
+        self.open()
 
     def open(self):
         conn, addr = self.s.accept()
