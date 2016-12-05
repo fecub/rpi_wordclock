@@ -23,10 +23,10 @@ class wordclock_socket:
         print 'Connection address:', addr
         while 1:
             data = conn.recv(BUFFER_SIZE)
+            if not data: break
             print "received data:", data
             conn.send(data)  # echo
-        # if not data: break
-        # conn.close()
+        conn.close()
 
     def close(self):
         self.s.close()

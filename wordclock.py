@@ -3,6 +3,7 @@ from importlib import import_module
 import inspect
 import os
 import time
+from thread import start_new_thread
 import wordclock_tools.wordclock_colors as wcc
 import wordclock_tools.wordclock_display as wcd
 import wordclock_tools.wordclock_interface as wci
@@ -41,6 +42,7 @@ class wordclock:
         self.wcd = wcd.wordclock_display(self.config)
 
         # create a socket object for remote controlling
+
         self.wso = wso.wordclock_socket()
 
         # Define path to general icons (not plugin-specific)
