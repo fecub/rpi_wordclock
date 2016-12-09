@@ -19,7 +19,8 @@ class bcolors:
 class wordclock_socket(threading.Thread):
     def __init__(self):
         # server things
-        self.bind_ip   = "127.0.0.1"
+        # self.bind_ip   = "127.0.0.1"
+        self.bind_ip = "192.168.0.132"
         self.bind_port = 10001
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((self.bind_ip,self.bind_port))
