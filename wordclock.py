@@ -125,16 +125,6 @@ class wordclock:
             # If plugin.run exits, loop through menu to select next plugin
             plugin_selected = False
 
-            # socket plugin
-            if (self.wso.waitForEvent()):
-                # print ("request in serverManager: %s" % self.wso.request())
-                # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
-                if(one_button_click):
-                    self.wci.waitForEvent([0, 0, 0], cps=10)
-                    one_button_click = False
-
-
-
             while not plugin_selected:
                 # The showIcon-command expects to have a plugin logo available
                 self.wcd.showIcon(plugin=self.plugins[plugin_index].name, iconName='logo')
