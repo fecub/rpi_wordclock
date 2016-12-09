@@ -9,6 +9,7 @@ import wordclock_tools.wordclock_display as wcd
 import wordclock_tools.wordclock_interface as wci
 import wordclock_tools.wordclock_socket as wso
 
+
 class wordclock:
     '''
     The class, which makes the wordclock run...
@@ -112,6 +113,8 @@ class wordclock:
         Makes the wordclock run...
         '''
 
+        one_button_click = True
+
         # Run the wordclock forever
         while True:
 
@@ -121,6 +124,17 @@ class wordclock:
 
             # If plugin.run exits, loop through menu to select next plugin
             plugin_selected = False
+
+            # socket plugin
+            if (self.wso.waitForEvent()):
+                # print ("request in serverManager: %s" % self.wso.request())
+                # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
+                if(one_button_click):
+                    self.wci.waitForEvent([0, 0, 0], cps=10)
+                    one_button_click = False
+
+
+
             while not plugin_selected:
                 # The showIcon-command expects to have a plugin logo available
                 self.wcd.showIcon(plugin=self.plugins[plugin_index].name, iconName='logo')

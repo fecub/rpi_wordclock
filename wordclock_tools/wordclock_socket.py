@@ -1,61 +1,70 @@
+__author__ = 'fecub'
+
 import socket
-import sys
-from thread import *
+import threading
 
-class wordclock_socket:
-    '''
-    A class for open socket to controll remotely the interface buttons
-    '''
+
+# color
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+
+class wordclock_socket(threading.Thread):
     def __init__(self):
-        '''
-        setup socket
-        '''
+        # server things
+        self.bind_ip   = "127.0.0.1"
+        self.bind_port = 10001
+        self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server.bind((self.bind_ip,self.bind_port))
+        self.server.listen(5)
 
-        HOST = '192.168.0.132'  # Symbolic name meaning all available interfaces
-        PORT = 8888  # Arbitrary non-privileged port
+        # property
+        self._request =''
+        self.tmp=''
 
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        print 'Socket created'
+        threading.Thread.__init__(self)
 
-        # Bind socket to local host and port
-        try:
-            s.bind((HOST, PORT))
-        except socket.error as msg:
-            print 'Bind failed. Error Code : ' + str(msg[0]) + ' Message ' + msg[1]
-            sys.exit()
+        print (bcolors.OKGREEN + "[*] Listening on %s:%d" % (self.bind_ip, self.bind_port) + bcolors.ENDC)
 
-        print 'Socket bind complete'
+    def handle_client(self, client_socket):
+        # this is our client-handling thread
+        # print out what the client sends
+        self.tmp = ''
+        # self._request = client_socket.recv(1024)
+        self.set_request(client_socket.recv(1024))
+        print (bcolors.OKGREEN + "[*] Received: %s" % self.request() + bcolors.ENDC)
+        # send back a packet
 
-        # Start listening on socket
-        s.listen(10)
-        print 'Socket now listening'
+        client_socket.send('HI') # verschiedene menues moeglich
+        client_socket.close()
 
-        # Function for handling connections. This will be used to create threads
-        def clientthread(conn):
-            # Sending message to connected client
-            conn.send('Welcome to the server. Type something and hit enter\n')  # send only takes string
 
-            # infinite loop so that function do not terminate and thread do not end.
-            while True:
+    def waitForEvent(self):
+        if (self.request() != self.tmp):
+            self.tmp = self._request
+            return True
 
-                # Receiving from client
-                data = conn.recv(1024)
-                reply = 'OK...' + data
-                if not data:
-                    break
 
-                conn.sendall(reply)
+    def set_request(self, p_request):
+        if self._request != p_request:
+            self._request = p_request
 
-            # came out of loop
-            conn.close()
 
-        # now keep talking with the client
-        while 1:
-            # wait to accept a connection - blocking call
-            conn, addr = s.accept()
-            print 'Connected with ' + addr[0] + ':' + str(addr[1])
+    def request(self):
+        return self._request
 
-            # start new thread takes 1st argument as a function name to be run, second is the tuple of arguments to the function.
-            start_new_thread(clientthread, (conn,))
 
-        s.close()
+    def run(self):
+        while True:
+            client,addr = self.server.accept()
+            print (bcolors.OKGREEN + "[*] Accepted connection from: %s:%d" % (addr[0],addr[1]) + bcolors.ENDC)
+            # spin up our client thread to handle incoming data
+            client_handler = threading.Thread(target=self.handle_client,args=(client,))
+            client_handler.start()
