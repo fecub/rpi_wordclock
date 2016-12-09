@@ -113,7 +113,7 @@ class wordclock:
         Makes the wordclock run...
         '''
 
-        one_button_click = True
+        # one_button_click = True
 
         # Run the wordclock forever
         while True:

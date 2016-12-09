@@ -94,6 +94,8 @@ class plugin:
         # Some initializations of the "previous" minute
         prev_min = -1
 
+        one_button_click = True
+
         while True:
             # Get current time
             now = datetime.datetime.now()
