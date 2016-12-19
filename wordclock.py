@@ -3,6 +3,7 @@ from importlib import import_module
 import inspect
 import os
 import time
+import sys
 from thread import start_new_thread
 import wordclock_tools.wordclock_colors as wcc
 import wordclock_tools.wordclock_display as wcd
@@ -97,9 +98,10 @@ class wordclock:
         '''
         try:
             print('Running plugin ' + self.plugins[plugin_index].name + '.')
-            self.plugins[plugin_index].run(self.wcd, self.wci)
+            self.plugins[plugin_index].run(self.wcd, self.wci, self.wso)
         except:
             print('ERROR: In plugin ' + self.plugins[plugin_index].name + '.')
+            print "Unexpected error:", sys.exc_info()[0]
             self.wcd.setImage(os.path.join(self.pathToGeneralIcons, 'error.png'))
             time.sleep(1)
             self.wcd.showText('Error in ' + self.plugins[plugin_index].name, fg_color=wcc.RED, fps = 15)

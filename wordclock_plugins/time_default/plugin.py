@@ -87,7 +87,7 @@ class plugin:
             self.brightness_mode_pos = 255
         self.brightness_change = 8
 
-    def run(self, wcd, wci):
+    def run(self, wcd, wci, wso):
         '''
         Displays time until aborted by user interaction on pin button_return
         '''
@@ -106,13 +106,15 @@ class plugin:
                 prev_min = -1 if now.minute == 59 else now.minute
 
             # socket plugin
-            # if (self.wso.waitForEvent()):
-            #     # print ("request in serverManager: %s" % self.wso.request())
-            #     # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
-            #     if(one_button_click):
-            #         wci.waitSecondsForEvent([0, 0, 0], cps=10)
+            if (wso.waitForEvent()):
+                print("wait for event girdi")
+                # print ("request in serverManager: %s" % self.wso.request())
+                # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
+                if(one_button_click):
+                    print("button click girdi")
+                    wci.waitSecondsForEvent([0, 0, 0], cps=10)
             #         one_button_click = False
-
+            print("wait for event cikti")
 
             event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 2)
             # Switch display color, if button_left is pressed
