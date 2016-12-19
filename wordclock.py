@@ -46,6 +46,7 @@ class wordclock:
         # create a socket object for remote controlling
 
         self.wso = wso.wordclock_socket()
+        self.wso.start()
 
         # Define path to general icons (not plugin-specific)
         self.pathToGeneralIcons = os.path.join(self.basePath, 'icons', self.wcd.dispRes())
