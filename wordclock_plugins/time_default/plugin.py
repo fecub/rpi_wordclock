@@ -106,12 +106,12 @@ class plugin:
                 prev_min = -1 if now.minute == 59 else now.minute
 
             # socket plugin
-            if (self.wso.waitForEvent()):
-                # print ("request in serverManager: %s" % self.wso.request())
-                # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
-                if(one_button_click):
-                    wci.waitSecondsForEvent([0, 0, 0], cps=10)
-                    one_button_click = False
+            # if (self.wso.waitForEvent()):
+            #     # print ("request in serverManager: %s" % self.wso.request())
+            #     # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
+            #     if(one_button_click):
+            #         wci.waitSecondsForEvent([0, 0, 0], cps=10)
+            #         one_button_click = False
 
 
             event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 2)
