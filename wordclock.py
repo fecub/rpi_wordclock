@@ -142,6 +142,7 @@ class wordclock:
                         plugin_index = len(self.plugins)-1
                     time.sleep(self.wci.lock_time)
                 if pin == self.wci.button_return or remote_event == self.wso.button_return:
+                    print("WORDCLOCK return girdi")
                     plugin_selected = True
                     time.sleep(self.wci.lock_time)
                 if pin == self.wci.button_right:
