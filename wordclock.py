@@ -131,6 +131,8 @@ class wordclock:
             print(plugin_selected)
             print(plugin_index)
             while not plugin_selected:
+                print(plugin_selected)
+                print(plugin_index)
                 # The showIcon-command expects to have a plugin logo available
                 self.wcd.showIcon(plugin=self.plugins[plugin_index].name, iconName='logo')
                 time.sleep(self.wci.lock_time)
