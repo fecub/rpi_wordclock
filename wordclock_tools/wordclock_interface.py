@@ -44,6 +44,7 @@ class wordclock_interface:
         cps: Checks per second
         '''
         while True:
+            print "wait for event"
             for i in pinrange_to_listen:
                 virtual_pin = -1
                 if(i == self.button_left):
