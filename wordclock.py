@@ -133,7 +133,7 @@ class wordclock:
                 self.wcd.showIcon(plugin=self.plugins[plugin_index].name, iconName='logo')
                 time.sleep(self.wci.lock_time)
                 remote_event = self.wso.waitForEvent()
-                print("remote_event: {0}", remote_event)
+                print("remote_event WORDCLOCK: {0}", remote_event)
                 pin = self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
                 if pin == self.wci.button_left:
                     plugin_index -=1

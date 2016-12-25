@@ -2,7 +2,7 @@ __author__ = 'fecub'
 
 import socket
 import threading
-
+import time
 
 # color
 class bcolors:
@@ -17,7 +17,7 @@ class bcolors:
 
 
 class wordclock_socket(threading.Thread):
-    def __init__(self):
+    def __init__(self, config):
         # server things
         # self.bind_ip   = "127.0.0.1"
         self.bind_ip = "192.168.0.132"
@@ -29,6 +29,15 @@ class wordclock_socket(threading.Thread):
         # property
         self._request =''
         self.tmp=''
+
+
+        self.button_left = int(config.get('wordclock_interface', 'pin_button_left'))
+        self.button_return = int(config.get('wordclock_interface', 'pin_button_return'))
+        self.button_right = int(config.get('wordclock_interface', 'pin_button_right'))
+
+        self.virtual_button_left = int(config.get('wordclock_interface', 'virtual_pin_button_left'))
+        self.virtual_button_return = int(config.get('wordclock_interface', 'virtual_pin_button_return'))
+        self.virtual_button_right = int(config.get('wordclock_interface', 'virtual_pin_button_right'))
 
         threading.Thread.__init__(self)
 
@@ -48,9 +57,37 @@ class wordclock_socket(threading.Thread):
 
 
     def waitForEvent(self):
-        if (self.request() != self.tmp):
-            self.tmp = self._request
-            return True
+        # print("self.request: {0}", self.request())
+        # print("self.tmp: {0}", self.tmp)
+        while True:
+            # if (self.request() != self.tmp):
+            #     self.tmp = self._request
+            returnvalue = -1
+            if (self.request() == "bleft"):
+                print("bleft girdi")
+                returnvalue = 17
+            if (self.request()== "bmiddle"):
+                print("bmiddle girdi")
+                returnvalue = 22
+            if (self.request() == "bright"):
+                print("bright girdi")
+                returnvalue = 24
+
+            return returnvalue
+
+            # if (self.request() == "bleft"):
+            #     print("bleft girdi")
+            #     return 7
+            # if (self.request()== "bmiddle"):
+            #     print("bmiddle girdi")
+            #     return 8
+            # if (self.request() == "bright"):
+            #     print("bright girdi")
+            #     return 11
+
+            time.sleep(1.0 / 10)
+
+        # return returnvalue
 
 
     def set_request(self, p_request):
