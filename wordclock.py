@@ -151,6 +151,8 @@ class wordclock:
                         plugin_index = 0
                     time.sleep(self.wci.lock_time)
 
+                print(plugin_selected)
+
             # Run selected plugin
             self.runPlugin(plugin_index)
 
