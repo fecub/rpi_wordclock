@@ -73,6 +73,7 @@ class wordclock_socket(threading.Thread):
                 print("bright girdi")
                 returnvalue = 24
 
+            self.set_request("")
             return returnvalue
 
             # if (self.request() == "bleft"):
