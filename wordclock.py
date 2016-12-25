@@ -128,8 +128,8 @@ class wordclock:
             # If plugin.run exits, loop through menu to select next plugin
             plugin_selected = False
 
+            print(plugin_selected)
             while not plugin_selected:
-                print(plugin_selected)
                 # The showIcon-command expects to have a plugin logo available
                 self.wcd.showIcon(plugin=self.plugins[plugin_index].name, iconName='logo')
                 time.sleep(self.wci.lock_time)
