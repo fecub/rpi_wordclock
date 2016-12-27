@@ -120,7 +120,7 @@ class plugin:
                 time.sleep(0.2)
             if (event == wci.button_return or remote_event == wso.button_return):
                 return # Return to main menu, if button_return is pressed
-            if (event == wci.button_right or remote_event == wso.button_left):
+            if (event == wci.button_right or remote_event == wso.button_right):
                 time.sleep(wci.lock_time)
                 self.color_selection(wcd, wci)
 
