@@ -28,7 +28,7 @@ class plugin:
         self.colors.append(wcc.Color(50, 230, 30))
         self.colors.append(wcc.Color(80, 255, 60))
 
-    def run(self, wcd, wci):
+    def run(self, wcd, wci, wso):
         '''
         Displays rain until aborted by user interaction on pin button_return
         '''
