@@ -106,8 +106,8 @@ class plugin:
                 prev_min = -1 if now.minute == 59 else now.minute
 
 
-            remote_event = wso.waitForEvent(1)
-            event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 0.01)
+            remote_event = wso.waitForEvent(2)
+            event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 2)
             # Switch display color, if button_left is pressed
             if (event == wci.button_left or remote_event == wso.button_left):
                 self.color_mode_pos += 1
