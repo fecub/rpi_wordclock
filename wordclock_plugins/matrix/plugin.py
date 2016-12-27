@@ -55,8 +55,8 @@ class plugin:
                     rain[x] = y + 1
             wcd.show()
             # input handling
-            remote_event = wso.waitForEvent(1)
-            event = wci.waitSecondsForEvent([wci.button_return, wci.button_left, wci.button_right], 0.01)
+            remote_event = wso.waitForEvent(0.5)
+            event = wci.waitSecondsForEvent([wci.button_return, wci.button_left, wci.button_right], 0.1)
             if (event == wci.button_return or remote_event == wso.button_return):
                 return
             elif (event == wci.button_left or remote_event == wso.button_left):
