@@ -105,20 +105,11 @@ class plugin:
                 self.show_time(wcd, wci)
                 prev_min = -1 if now.minute == 59 else now.minute
 
-            # socket plugin
-            # if (wso.waitForEvent()):
-            #     pass
-                # print ("request in serverManager: %s" % self.wso.request())
-                # self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
-                # if(one_button_click):
-                #     print("button click girdi")
-                #     wci.waitSecondsForEvent([0, 0, 0], cps=10)
-                #     one_button_click = Falses
+
             remote_event = wso.waitForEvent(1)
-            print("remote_event: {0}", remote_event)
             event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 2)
             # Switch display color, if button_left is pressed
-            if (event == wci.button_left):
+            if (event == wci.button_left or remote_event == wso.button_left):
                 self.color_mode_pos += 1
                 if self.color_mode_pos == len(self.color_modes):
                     self.color_mode_pos = 0
@@ -129,7 +120,7 @@ class plugin:
                 time.sleep(0.2)
             if (event == wci.button_return or remote_event == wso.button_return):
                 return # Return to main menu, if button_return is pressed
-            if (event == wci.button_right):
+            if (event == wci.button_right or remote_event == wso.button_left):
                 time.sleep(wci.lock_time)
                 self.color_selection(wcd, wci)
 

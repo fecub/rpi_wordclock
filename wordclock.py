@@ -120,7 +120,6 @@ class wordclock:
 
         # Run the wordclock forever
         while True:
-
             # Run the default plugin
             self.runPlugin(self.default_plugin)
             plugin_index = self.default_plugin
@@ -128,15 +127,11 @@ class wordclock:
             # If plugin.run exits, loop through menu to select next plugin
             plugin_selected = False
 
-            print(plugin_selected)
-            print(plugin_index)
             while not plugin_selected:
                 # The showIcon-command expects to have a plugin logo available
                 self.wcd.showIcon(plugin=self.plugins[plugin_index].name, iconName='logo')
                 time.sleep(self.wci.lock_time)
                 remote_event = self.wso.waitForEvent(0.5)
-                # pin = self.wci.waitForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
-                # pin = self.wci.waitSecondsForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], cps=10)
                 pin = self.wci.waitSecondsForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], 0.01)
                 if pin == self.wci.button_left or remote_event == self.wso.button_left:
                     plugin_index -=1

@@ -57,11 +57,7 @@ class wordclock_socket(threading.Thread):
 
 
     def waitForEvent(self, seconds):
-        # print("self.request: {0}", self.request())
-        # print("self.tmp: {0}", self.tmp)
         while True:
-            # if (self.request() != self.tmp):
-            #     self.tmp = self._request
             returnvalue = -1
             if (self.request() == "bleft"):
                 print("bleft girdi")
@@ -76,19 +72,7 @@ class wordclock_socket(threading.Thread):
             self.set_request("")
             return returnvalue
 
-            # if (self.request() == "bleft"):
-            #     print("bleft girdi")
-            #     return 7
-            # if (self.request()== "bmiddle"):
-            #     print("bmiddle girdi")
-            #     return 8
-            # if (self.request() == "bright"):
-            #     print("bright girdi")
-            #     return 11
-
             time.sleep(seconds / 10)
-
-        # return returnvalue
 
 
     def set_request(self, p_request):

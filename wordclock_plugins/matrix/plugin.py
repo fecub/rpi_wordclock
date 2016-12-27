@@ -55,12 +55,13 @@ class plugin:
                     rain[x] = y + 1
             wcd.show()
             # input handling
+            remote_event = wso.waitForEvent(0.5)
             event = wci.waitSecondsForEvent([wci.button_return, wci.button_left, wci.button_right], 0.1)
-            if event == wci.button_return:
+            if (event == wci.button_return or remote_event == wso.button_middle):
                 return
-            elif event == wci.button_left:
+            elif (event == wci.button_left or remote_event == wso.button_left):
                 self.threshold = min(0.95, self.threshold + 0.05)
-            elif event == wci.button_right:
+            elif (event == wci.button_right or remote_event == wso.button_right):
                 self.threshold = max(0.7, self.threshold - 0.05)
 
 
