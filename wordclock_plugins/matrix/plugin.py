@@ -1,4 +1,4 @@
-# Authored by Markus E.
+    # Authored by Markus E.
 
 import os
 import wordclock_tools.wordclock_colors as wcc
