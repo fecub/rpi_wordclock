@@ -56,7 +56,7 @@ class wordclock_socket(threading.Thread):
         client_socket.close()
 
 
-    def waitForEvent(self):
+    def waitForEvent(self, seconds):
         # print("self.request: {0}", self.request())
         # print("self.tmp: {0}", self.tmp)
         while True:
@@ -86,7 +86,7 @@ class wordclock_socket(threading.Thread):
             #     print("bright girdi")
             #     return 11
 
-            time.sleep(1.0 / 10)
+            time.sleep(seconds / 10)
 
         # return returnvalue
 

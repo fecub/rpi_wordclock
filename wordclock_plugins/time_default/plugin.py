@@ -114,7 +114,7 @@ class plugin:
                 #     print("button click girdi")
                 #     wci.waitSecondsForEvent([0, 0, 0], cps=10)
                 #     one_button_click = Falses
-            remote_event = wso.waitForEvent()
+            remote_event = wso.waitForEvent(1)
             print("remote_event: {0}", remote_event)
             event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 2)
             # Switch display color, if button_left is pressed
