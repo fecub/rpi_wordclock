@@ -57,7 +57,7 @@ class plugin:
             # input handling
             remote_event = wso.waitForEvent(0.5)
             event = wci.waitSecondsForEvent([wci.button_return, wci.button_left, wci.button_right], 0.1)
-            if (event == wci.button_return or remote_event == wso.button_middle):
+            if (event == wci.button_return or remote_event == wso.button_return):
                 return
             elif (event == wci.button_left or remote_event == wso.button_left):
                 self.threshold = min(0.95, self.threshold + 0.05)
