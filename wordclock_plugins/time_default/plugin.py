@@ -107,7 +107,7 @@ class plugin:
 
 
             remote_event = wso.waitForEvent(1)
-            event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 2)
+            event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 0.01)
             # Switch display color, if button_left is pressed
             if (event == wci.button_left or remote_event == wso.button_left):
                 self.color_mode_pos += 1
