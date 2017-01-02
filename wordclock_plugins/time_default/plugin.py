@@ -119,6 +119,7 @@ class plugin:
                 self.show_time(wcd, wci)
                 time.sleep(0.2)
             if (event == wci.button_return or remote_event == wso.button_return):
+                print("return to Menu")
                 return # Return to main menu, if button_return is pressed
             if (event == wci.button_right or remote_event == wso.button_right):
                 time.sleep(wci.lock_time)
