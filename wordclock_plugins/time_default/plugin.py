@@ -94,8 +94,6 @@ class plugin:
         # Some initializations of the "previous" minute
         prev_min = -1
 
-        one_button_click = True
-
         while True:
             # Get current time
             now = datetime.datetime.now()
@@ -108,6 +106,8 @@ class plugin:
 
             remote_event = wso.waitForEvent(0.5)
             event = wci.waitSecondsForEvent([wci.button_left, wci.button_return, wci.button_right], 1.5)
+
+            print remote_event
             # Switch display color, if button_left is pressed
             if (event == wci.button_left or remote_event == wso.button_left):
                 self.color_mode_pos += 1
@@ -122,7 +122,7 @@ class plugin:
                 return # Return to main menu, if button_return is pressed
             if (event == wci.button_right or remote_event == wso.button_right):
                 time.sleep(wci.lock_time)
-                self.color_selection(wcd, wci)
+                self.color_selection(wcd, wci, wso)
 
     def show_time(self, wcd, wci):
         now = datetime.datetime.now()
@@ -142,7 +142,7 @@ class plugin:
             wcd.setMinutes(now, self.minute_color)
             wcd.show()
 
-    def color_selection(self, wcd, wci):
+    def color_selection(self, wcd, wci, wso):
         while True:
             # BEGIN: Rainbow generation as done in rpi_ws281x strandtest example! Thanks to Tony DiCola for providing :)
             if self.rb_pos < 85:
@@ -161,8 +161,10 @@ class plugin:
             wcd.show()
             self.rb_pos += 1
             if self.rb_pos == 256: self.rb_pos = 0
+
+            remote_event = wso.waitForEvent(0.5)
             event = wci.waitSecondsForEvent([wci.button_return, wci.button_left, wci.button_right], 0.1)
-            if event > 0:
+            if (event > 0 or remote_event == wso.button_return):
                 time.sleep(wci.lock_time)
                 break
         while True:
@@ -177,8 +179,10 @@ class plugin:
             wcd.show()
             if self.brightness_mode_pos < abs(self.brightness_change) or self.brightness_mode_pos > 255 - abs(self.brightness_change):
                 self.brightness_change *= -1
+
+            remote_event = wso.waitForEvent(0.5)
             event = wci.waitSecondsForEvent([wci.button_return, wci.button_left, wci.button_right], 0.1)
-            if event > 0:
+            if (event > 0 or remote_event == wso.button_return):
                 time.sleep(wci.lock_time)
                 return
 
