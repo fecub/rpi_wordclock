@@ -131,6 +131,7 @@ class wordclock:
                 time.sleep(self.wci.lock_time)
                 remote_event = self.wso.waitForEvent(0.01)
                 pin = self.wci.waitSecondsForEvent([self.wci.button_left, self.wci.button_return, self.wci.button_right], 0.1) #0.5
+                print remote_event
                 if pin == self.wci.button_left or remote_event == self.wso.button_left:
                     plugin_index -=1
                     if plugin_index == -1:
